@@ -11,7 +11,7 @@ class PoemRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,10 +21,15 @@ class PoemRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this['status'] = $this->status ? true : false;
+
         return [
+            'name_tm' => 'required|string',
+            'name_ru' => 'required|string',
             'text_tm' => 'required|string',
             'text_ru' => 'required|string',
-            'author' => 'required|string',
+            'author_tm' => 'required|string',
+            'author_ru' => 'required|string',
             'status' => 'required|boolean',
         ];
     }

@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('name_ru');
             $table->longText('text_tm');
             $table->longText('text_ru');
-            $table->string('author');
+            $table->string('author_tm');
+            $table->string('author_ru');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

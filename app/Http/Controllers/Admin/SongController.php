@@ -9,7 +9,7 @@ class SongController extends Controller
 {
     public function index(){
 
-        return view("admin.song");
+        return view("admin.audioPoem");
         
     }
 }

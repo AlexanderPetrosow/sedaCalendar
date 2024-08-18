@@ -1,32 +1,38 @@
 @extends('userlayouts.main')
 @section('content')
-{{-- {{dd(app()->getLocale());}} --}}
-    <div class="flex flex-col w-full">
-        <div class="flex justify-center text-[26px]">
-                <h1>Gurbannazar Ezizow</h1>                    
-       
+    <div class="flex flex-col flex-1 w-full pb-16">
+        <div class="flex justify-center md:justify-end text-[26px] p-0 md:pr-24">
+                <p class="text-[30px] md:text-[32px]" >
+                    @lang('nav.G_Ezizow')    
+                </p>                    
         </div>
-        <div class="flex justify-center gap-4 px-16">
-            <div class="flex-1 flex justify-center items-center">
-                <div class="w-[200px] h-auto">
-                    <img class="bg-cover" src="{{asset('images/image2.jpg')}}" alt="">
+        <div class="relative flex flex-col justify-center px-2 pb-16 md:px-16 md:gap-12 md:flex-row">
+            <div class="flex items-center justify-center flex-1">
+                <div class="w-[275px] h-auto rounded-full md:rounded-lg overflow-hidden">
+                    <img class="hidden bg-cover md:flex" src="{{asset('images/image1.jpg')}}" alt="">
+                    <img class="flex bg-cover md:hidden" src="{{asset('images/image2.jpg')}}" alt="">
                 </div>
             </div>
-            <div class="flex justify-center items-center relative">
-                <div class="">
-                    <p>
-                        Gurbannazar Ezizow - talantly türkmen şahyry, Türkmenistanyň Magtymguly adyndaky Döwlet baýragynyň eýesi.
-                        Gurbannazar Ezizow 1940-njy ýylyň 1-nji martynda Aşgabat şäheriniň Büzmeýin obasynda eneden bolýar. 1948-nji ýylda mekdebe barýar we 1959-njy ýylda Aşgabat şäherindäki 29-njy orta mekdebi tamamlaýar. Şol ýyl Türkmen döwlet uniwersitetiniň filologiýa fakultetine okuwa girýär. Uniwersiteti 1964-nji ýylda tamamlaýar we Çagalar edebiýatynyň birleşen neşirýatynyň redaksiýasyna işe iberilýär.
+            <div class="flex items-start justify-start flex-1">
+                <div class="pt-12">
+                    <p class="text-justify indent-4 text-[18px] md:text-[20px]">
+                        @lang('nav.about_G_Ezizow')
                     </p>
-                    <span class="absolute bottom-0 right-0">
-                        1940-1975
-                    </span>
                 </div>
             </div> 
+            <span class="absolute bottom-0 right-8 md:right-16">
+                1940-1975
+            </span>
         </div>
     </div>
-
-    @include('userPages.poems')
-    @include('userPages.songs')
-    @include('userPages.galleries')
+    <div class="flex flex-col gap-12 px-2">
+        @include('userPages.poems')
+        @include('userPages.audioPoem')
+        @include('userPages.galleries')
+        <div class="footer h-[100px] w-full flex justify-center items-center ">
+            <h1 class="text-black text-[28px]">
+                Arassa Nusga
+            </h1>
+        </div>
+    </div>
 @endsection

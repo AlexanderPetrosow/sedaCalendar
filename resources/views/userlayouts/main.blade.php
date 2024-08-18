@@ -3,10 +3,22 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>{{ config('app.name', 'Laravel') }}</title>
-        @vite('resources/css/app.css')
-        {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
+        <title>{{ config('app.name', 'G.Ezizow') }}</title>
+        <link rel="shortcut icon" href="{{  asset('icons/logo.png')}}" type="image/x-icon">
+        {{-- google fonts --}}
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+        {{-- google fonts --}}
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
+            *{
+                font-family: "EB Garamond", serif;
+                font-optical-sizing: auto;
+                font-weight: 500;
+                font-style: normal;
+            }
             .line-clamp {
                 display: -webkit-box;
                 -webkit-line-clamp: 2;
@@ -17,78 +29,112 @@
                 scroll-behavior: smooth;
             }
             .manual-height{
-                height: calc(100vh - 86px);
+                height: 100%;
                 scroll-behavior: smooth;
-                scrollbar-width: thin;
             }
         </style>
     </head>
-    <body >
-        <div class="">
-            <nav class="bg-gray-200 border-gray-200 dark:bg-gray-900">
-                <div class="container flex items-center justify-between p-4 mx-auto">
-                    <div  id="mega-menu-full"  class="items-center justify-between hidden w-full md:flex md:w-auto">
-                        <ul  class="flex flex-col p-4 mt-4 font-medium capitalize bg-gray-200 border border-gray-100 rounded-lg md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-gray-200 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                            <li>
-                                <a href="#poems" class="block px-3 py-2 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">{{__('nav.poems')}}</a>
-                            </li>
-                            <li>
-                                <a href="#songs" class="block px-3 py-2 text-gray-900 rounded md:p-0 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{__('nav.songs')}}</a>
-                            </li>
-                            <li>
-                                <a  href="#galleries" class="block px-3 py-2 text-gray-900 rounded md:p-0 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">@lang('nav.galleries')</a>
-                            </li>
-                        </ul>
+    <body class="bg-[#E6DDD4]">
+            <nav id="header" class="sticky top-0 z-50">
+                <div class="container relative flex flex-col items-center justify-between p-4 mx-auto md:static md:flex-row">
+                    <div class="flex items-center justify-between w-full md:justify-start">
+                        <div>
+                            <img class="w-[126px] h-auto" src="{{asset('icons/logo.png')}}" alt="Logo">
+                        </div>
+                        <div class="flex md:hidden">
+                            <i onclick="toggleDropdownNavBar()" class='bx bx-menu text-[24px]'></i>
+                        </div>
                     </div>
-                    <div class="flex flex-row capitalize">
-                        <div id="mega-menu-full"  class="flex-row hidden md:flex">
-                            <a href="{{route('login')}}">
-                                <div class="p-2 text-[#11101d] cursor-pointer">@lang('nav.login')</div>
-                            </a>
+                    <div  id="mega-menu-full"  class="absolute flex flex-col w-full h-0 overflow-hidden text-white transition-all duration-[1s] bg-gray-900 md:transition-none md:overflow-visible md:h-auto md:text-inherit md:bg-inherit md:static top-full md:gap-4 md:items-center md:justify-end md:flex-row md:w-auto">
+                        <div>
+                            <ul class="flex flex-col p-2 font-medium capitalize rounded-none md:rounded-lg whitespace-nowrap md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                                <li>
+                                    <a onclick="toggleDropdownNavBarHide()" href="#poems" class="block px-3 py-2 rounded text-inherit md:text-gray-900 md:p-0 hover:bg-gray-800 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{__('nav.poems')}}</a>
+                                </li>
+                                <li>
+                                    <a onclick="toggleDropdownNavBarHide()" href="#audio_poems" class="block px-3 py-2 rounded text-inherit md:text-gray-900 md:p-0 hover:bg-gray-800 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">{{__('nav.audio_poems')}}</a>
+                                </li>
+                                <li>
+                                    <a onclick="toggleDropdownNavBarHide()" href="#galleries" class="block px-3 py-2 rounded text-inherit md:text-gray-900 md:p-0 hover:bg-gray-800 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">@lang('nav.galleries')</a>
+                                </li>
+                            </ul>
                         </div>
-                        {{-- lang --}}
-                        <div class="relative inline-block text-left">
+                       
+                        <div class="relative z-50 inline-block">
                             <!-- Button to toggle dropdown -->
-                            <button id="languageButton" onclick="toggleDropdown()" class="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-haspopup="true" aria-expanded="true">
-                                выберите язык!
-                            <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
+                            <button id="languageButton" onclick="toggleDropdown()" class="items-center justify-center hidden w-full px-4 py-2 text-sm font-medium text-gray-700 rounded-md shadow-sm md:inline-flex focus:outline-none focus:ring-2 focus:ring-offset-2" aria-haspopup="true" aria-expanded="true">
+                                <i class='mr-1 bx bx-world' ></i> <span class="uppercase "> {{app()->getLocale()}} </span>
                             </button>
-                        
-                            <!-- Dropdown menu -->
-                            <div id="languageDropdown" class="absolute right-0 hidden w-full mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="languageButton">
-                            <div class="py-1" role="none">
-                                <!-- Language options -->
-                                <a href="locale/tm" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Turkmen</a>
-                                <a href="locale/ru" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Russian</a>
+                            <div id="languageDropdown" class="absolute right-0 w-full m-0 text-white origin-top-right bg-gray-600 rounded-none shadow-lg md:text-inherit md:bg-white md:rounded-md md:mt-2 md:hidden ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="languageButton">
+                            <div class="p-2 md:px-0 md:py-1" role="none">
+                                @if (app()->getLocale() == 'tm')
+                                    <a href="locale/tm" class="block px-4 py-2 text-sm bg-gray-400 rounded md:bg-inherit md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">TM</a>
+                                    <a href="locale/ru" class="block px-4 py-2 text-sm rounded md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                        RU
+                                    </a>
+                                @else
+                                    <a href="locale/tm" class="block px-4 py-2 text-sm rounded md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">TM</a>
+                                    <a href="locale/ru" class="block px-4 py-2 text-sm bg-gray-400 rounded md:bg-inherit md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                        RU
+                                    </a>
+                                @endif
                             </div>
                             </div>
                         </div>
-                        {{--  --}}
                     </div>
                 </div>
             </nav>
-            <div class="p-1 overflow-hidden overflow-y-auto manual-height">
+            <div class="p-1 manual-height">
                 <div class="container mx-auto">
                     @yield('content')
                 </div>
             </div>
-        </div>
     </body>
 </html>
+<style>
+    .heightWithAnimation{
+        height: 224px;
+    }
+</style>
 <script>
+    function toggleDropdownNavBar(){
+        const dropdownNavBar = document.getElementById('mega-menu-full');
+        dropdownNavBar.classList.toggle('heightWithAnimation');
+    }
+
+    function toggleDropdownNavBarHide(){
+        const dropdownNavBar = document.getElementById('mega-menu-full');
+        dropdownNavBar.classList.remove('heightWithAnimation');
+    }
+</script>
+
+<script>
+    // sticky header
+    window.onscroll = function() {
+        changeHeaderColor();
+    };
+
+    function changeHeaderColor() {
+        const header = document.getElementById("header");
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            header.style.backgroundColor = "#cfc4b8"; // Color when scrolled
+        } else {
+            header.style.backgroundColor = "#E6DDD4"; // Initial color
+        }
+    }
+    // sticky header
+    // for language
     function toggleDropdown() {
       const dropdown = document.getElementById('languageDropdown');
-      dropdown.classList.toggle('hidden');
+      dropdown.classList.toggle('md:hidden');
     }
-  
-    // Optional: Close the dropdown when clicking outside of it
+
     window.addEventListener('click', function(event) {
       const button = document.getElementById('languageButton');
       const dropdown = document.getElementById('languageDropdown');
       if (!button.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.classList.add('hidden');
+        dropdown.classList.add('md:hidden');
       }
     });
+    // for language
   </script>

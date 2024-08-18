@@ -9,23 +9,31 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.4.1/tinymce.min.js" integrity="sha512-c46AnRoKXNp7Sux2K56XDjljfI5Om/v1DvPt7iRaOEPU5X+KZt8cxzN3fFzemYC6WCZRhmpSlZvPA1pttfO9DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
     <div id="app">
-        <main >
+        <main>
             <div class="w-full h-full dashboard-body">
                 <div id="removeClass" class="z-50 sidebar activeClass">
                     <div class="logo_content">
                         <div class="logo">
                             <a href="{{route('admin.home')}}">
-                                <div class="logo_name">G. Ezizow</div>
+                                <div class="logo_name w-[126px] h-auto">
+                                    <img src="{{asset('images/logo.png')}}" alt="">
+                                </div>
                             </a>
                         </div>
-                        <i class="cursor-pointer bx bx-menu" id="btn" onclick="myFunction()"></i>
+                        <div id="hide">
+                            <i  class="cursor-pointer bx bx-menu" id="btn" onclick="hide()"></i>
+                        </div>
+                        <div id="show">
+                            <i  class="cursor-pointer bx bx-menu" id="btn" onclick="show()"></i>
+                        </div>
                     </div>
-                    <ul class="nav_list">
+                    <ul class="capitalize nav_list">
                         <li>
                             <a href="{{route('admin.poem')}}">
                                 <i class="bx bxs-dashboard"></i>
@@ -33,22 +41,45 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.song')}}">
-                                <i class="bx bxs-food-menu"></i>
-                                <span class="links_name">{{__('nav.songs')}}</span>
+                            <a href="{{route('admin.audioPoem')}}"> 
+                                <i class='bx bx-music' ></i>
+                                <span class="links_name">{{__('nav.audio_poems')}}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{route('admin.gallery')}}">
-                                <i class="bx bxs-food-menu"></i>
+                                <i class='bx bx-photo-album' ></i>
                                 <span class="links_name">{{__('nav.galleries')}}</span>
                             </a>
                         </li>
+                        @if(auth()->user()->is_admin === 1)
+                        <li>
+                            <a href="{{route('admin.controll')}}">
+                                <i class='bx bx-user-plus'></i>
+                                <span class="links_name">{{__('nav.create_admin')}}</span>
+                            </a>
+                        </li>
+                        @endif
+                        
                     </ul>
                     <div class="profile_content">
+                        <div class="flex flex-row justify-start w-full gap-4 m-4">
+                            <div>
+                                <a href="{{route('change.locale',['lang'=>'tm'])}}">
+                                    <div>
+                                        <i class='bx bx-world'>TM</i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{{route('change.locale',['lang' => 'ru'])}}">
+                                    <i class='bx bx-world'>RU</i>
+                                </a>
+                            </div>
+                        </div>
                         <div class="profile">
                             <div class="profile_details">
-                                    <img src="/menu-icons/owner2.webp" alt="" />
+                                    <img src="/icons/owner2.webp" alt="" />
                                 <div class="name_job">
                                         <div class="name">{{ Auth::user()->name }}</div>
                                         @if (Auth::user()->is_admin == 1)
@@ -76,251 +107,18 @@
     </div>
 </body>
 </html>
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
-    .nav_list{
-        color:white;
-    }
-    ul>li{
-        margin:0 2px;
-        cursor: pointer;
-    }
-    .router-link-active {
-        background: #fff;
-    }
-    
-    .router-link-active > .links_name,
-    .router-link-active > i {
-        color: #11101d;
-    }
-    
-    .dashboard-body {
-        position: relative;
-        min-height: 100vh;
-        width: 100%;
-        overflow: hidden;
-    }
-    
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 78px;
-        background: #11101d;
-        padding: 6px 14px;
-        transition: all 0.5s ease;
-    }
-    .sidebar.activeClass {
-        width: 260px;
-    }
-    .sidebar > .logo_content > .logo {
-        color: #fff;
-        display: flex;
-        height: 50px;
-        width: 100%;
-        align-items: center;
-        opacity: 0;
-        pointer-events: none;
-        transition: all 0.5s ease;
-    }
-    
-    .sidebar.activeClass .logo_content > .logo {
-        opacity: 1;
-        pointer-events: none;
-    }
-    
-    .logo_content .logo i {
-        font-size: 28px;
-        margin-right: 5px;
-    }
-    
-    .logo_name {
-        font-size: 20px;
-        font-weight: 400;
-        white-space: nowrap;
-    }
-    
-    .sidebar #btn {
-        position: absolute;
-        color: #fff;
-        left: 50%;
-        top: 6px;
-        font-size: 20px;
-        height: 50px;
-        width: 50px;
-        text-align: center;
-        line-height: 50px;
-        transform: translateX(-50%);
-        transition: all 0.5s ease;
-    }
-    .sidebar.activeClass #btn {
-        left: 90%;
-    }
-    
-    .sidebar ul {
-        margin-top: 20px;
-    }
-    .sidebar ul li {
-        position: relative;
-        height: 50px;
-        width: 100%;
-        margin: 0 5px;
-        list-style: none;
-        line-height: 50px;
-        margin-top: 4px;
-    }
 
-    .sidebar ul li:hover .arrowToolTip {
-        transition: all 0.5s ease;
-        opacity: 1;
-        top: 0;
+<script>
+    function hide() {
+    const element = document.getElementById("removeClass");  // Get the DIV element
+    element.classList.remove("activeClass"); // Remove mystyle class from DIV
+    document.getElementById("hide").style.display='none';
+    document.getElementById("show").style.display='block';
     }
-    .sidebar ul li input {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        left: 0;
-        top: 0;
-        border-radius: 12px;
-        outline: none;
-        border: none;
-        background: #1d1b31;
-        padding-left: 50px;
-        font-size: 18px;
-        color: #fff;
+    function show() {
+    const element = document.getElementById("removeClass");  // Get the DIV element
+    element.classList.add("activeClass"); // Remove mystyle class from DIV
+    document.getElementById("hide").style.display='block';
+    document.getElementById("show").style.display='none';
     }
-    .sidebar ul li a {
-        color: #fff;
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        transition: all 0.4s ease;
-        border-radius: 12px;
-        overflow: hidden;
-    }
-    .sidebar ul li a:hover {
-        color: #11101d;
-        background: #fff;
-    }
-    .sidebar ul li i {
-        height: 50px;
-        min-width: 50px;
-        border-radius: 12px;
-        line-height: 50px;
-        text-align: center;
-    }
-    .sidebar .links_name {
-        opacity: 0;
-        pointer-events: none;
-        white-space: nowrap;
-        transition: all 0.5s ease;
-    }
-    .sidebar.activeClass .links_name {
-        opacity: 1;
-        pointer-events: none;
-    }
-    
-    .sidebar .profile_content {
-        position: absolute;
-        color: #fff;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-    }
-    
-    .sidebar .profile_content .profile {
-        position: relative;
-        padding: 10px 6px;
-        height: 60px;
-        background: none;
-    }
-    
-    .sidebar.sidebar.activeClass .profile_content .profile {
-        background: #1d1b31;
-    }
-    .profile_content .profile .profile_details {
-        display: flex;
-        align-items: center;
-        opacity: 0;
-        pointer-events: none; /* i can not understand*/
-        white-space: nowrap;
-        transition: all 0.5s ease;
-    }
-    
-    .sidebar.activeClass .profile .profile_details {
-        opacity: 1;
-        pointer-events: auto;
-    }
-    
-    .profile .profile_details img {
-        width: 45px;
-        height: 45px;
-        object-fit: cover;
-        border-radius: 12px;
-    }
-    
-    .profile .profile_details .name_job {
-        margin-left: 10px;
-    }
-    
-    .profile .profile_details .name {
-        font-size: 15px;
-        font-weight: 400;
-    }
-    
-    .profile .profile_details .job {
-        font-size: 12px;
-    }
-    
-    .profile #log_out {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 10px;
-        min-width: 50px;
-        line-height: 50px;
-        font-size: 20px;
-        border-radius: 12px;
-        text-align: center;
-        transition: all 0.5s ease;
-        background: #1a1b31;
-    }
-    
-    .sidebar.activeClass .profile #log_out {
-        left: 88%;
-        background: none;
-    }
-    
-    .home_content {
-        position: absolute;
-        height: 100%;
-        width: calc(100% - 78px);
-        left: 78px;
-        transition: all 0.5s ease;
-    }
-    .home_content .text {
-        font-size: 25px;
-        font-weight: 500;
-        color: #1d1b31;
-        margin: 14px;
-    }
-    
-    .sidebar.activeClass ~ .home_content {
-        width: calc(100% - 260px);
-        left: 260px;
-    }
-    </style>
-    <script>
-        function myFunction() {
-        const element = document.getElementById("removeClass");  // Get the DIV element
-        element.classList.remove("activeClass"); // Remove mystyle class from DIV
-        // element.classList.add("newone"); // Add newone class to DIV
-        }
-    </script>
+</script>

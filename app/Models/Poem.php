@@ -10,9 +10,12 @@ class Poem extends Model
     use HasFactory;
 
     protected $fillable = [
+        'name_tm',
+        'name_ru',
         'text_tm',
         'text_ru',
-        'author',
+        'author_tm',
+        'author_ru',
         'status'
     ];
 }
