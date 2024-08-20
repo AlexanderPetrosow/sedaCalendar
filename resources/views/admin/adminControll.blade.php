@@ -57,19 +57,15 @@
                 <div class="w-full max-w-lg p-4 mx-auto border border-gray-300 rounded-sm">
                     <div class="text-center">
                         <a href="javascript:void(0)">
-                            <img src="{{asset('images/logo.png')}}" alt="логотип" class='inline-block w-40' />
+                            <img src="{{asset('icons/logo.png')}}" alt="логотип" class='inline-block w-40' />
                         </a>
                     </div>
-                    <form action="{{route('admin.create')}}" method="post">
+                    <form action="{{ route('register') }}" method="post">
                         @csrf
                         <div class="space-y-2">
                             <div>
                                 <label class="text-gray-800 text-sm mb-[2px] block">Имя</label>
                                 <input name="name" type="text" class="w-full px-4 py-3 text-sm text-gray-800 bg-white border border-gray-300 rounded-sm outline-blue-500" placeholder="Введите имя" required />
-                            </div>
-                            <div>
-                                <label class="text-gray-800 text-sm mb-[2px] block">Имя пользователя</label>
-                                <input name="username" type="text" class="w-full px-4 py-3 text-sm text-gray-800 bg-white border border-gray-300 rounded-sm outline-blue-500" placeholder="Введите имя пользователя" required/>
                             </div>
                             <div>
                                 <label class="text-gray-800 text-sm mb-[2px] block">Email</label>

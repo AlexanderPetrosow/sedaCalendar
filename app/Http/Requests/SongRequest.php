@@ -21,10 +21,11 @@ class SongRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this['status'] = $this->status ? true : false;
         return [
             'name_tm' => 'required|string',
             'name_ru' => 'required|string',
-            'filename' => 'required|file|max:10240',
+            'audio' => 'required|max:10240',
             'status' => 'required|boolean',
         ];
     }

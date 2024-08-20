@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="w-full h-full flex flex-col items-center p-12 relative">
+    <div class="relative flex flex-col items-center w-full h-full p-12">
         <div class="flex justify-start w-full">
             <span class="text-[#1D1B31] text-[28px] font-bold">{{__('nav.audio_poems')}}</span>
         </div>
@@ -11,7 +11,7 @@
                 <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">порядок</button>
             </div>
         </div>
-        {{-- @include('./admin/includePoem.index') --}}
+        @include('./admin/includeAudioPoem.index')
     </div>
 
          @if(isset($poem->showEdit)) 

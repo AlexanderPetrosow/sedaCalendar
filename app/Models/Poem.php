@@ -16,6 +16,7 @@ class Poem extends Model
         'text_ru',
         'author_tm',
         'author_ru',
-        'status'
+        'status',
+        'order'
     ];
 }

@@ -1,55 +1,60 @@
-<div id="modal_poem" class="absolute hidden top-0 left-0 flex-col items-center  w-full h-full bg-[#979595c5] text-white py-8 px-8">
-    <div class="absolute top-16 right-16">
-        <i onclick="hideModal()" class='bx bx-x text-[40px] cursor-pointer'></i>
-    </div>
-    <div style="scrollbar-width: thin;" class="flex flex-col items-center justify-start overflow-hidden overflow-y-auto w-full h-full bg-[#859094a2] py-8">
-        <div class="flex justify-center items-center text-[20px]">
-            <span class="text-[#2c3a8b]">
-                Создание стихотворения
-            </span>
+<div id="modal_poem" class="absolute hidden top-0 left-0 flex-col items-center justify-center w-full h-full bg-[#979595c5] text-white">
+    <div class="flex items-center justify-center w-full h-full">
+        <div style="scrollbar-width: thin;" class=" w-[650px]  overflow-hidden overflow-y-auto bg-[#859094a2] py-4 relative">
+            <div class="absolute top-2 right-2">
+                <i onclick="hideModal()" class='bx bx-x text-[40px] cursor-pointer text-gray-200'></i>
+            </div>
+            <div class="flex justify-center items-center text-[20px]">
+                <span class="text-gray-800">
+                    Создание стихотворения
+                </span>
+            </div>
+            <form method="POST" action="{{route('poem.store')}}" class="flex flex-col w-full gap-2 px-12 py-2">
+                @csrf
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div>
+                        <input type="text" id="name_tm" name="name_tm" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="Название тм" required />
+                    </div>
+                    <div>
+                        <input type="text" id="name_ru" name="name_ru" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="Название ру" required />
+                    </div>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div>
+                        <textarea class="text_tm" id="text_tm" name="text_tm" placeholder="стихотворения тм..."></textarea>
+                    </div>
+                    <div>
+                        <textarea class="text_ru" id="text_ru" name="text_ru" placeholder="стихотворения ру..."></textarea>
+                    </div>
+                </div>
+                <div class="grid gap-6 md:grid-cols-2">
+                    <div>
+                        <input type="text" id="author_name_tm" name="author_tm" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="имя автора тм" required />
+                    </div>
+                    <div>
+                        <input type="text" id="author_name_ru" name="author_ru" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="имя автора ру" required />
+                    </div>
+                </div>
+                <div>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="checkbox" name="status" class="sr-only peer" checked>
+                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                        <span class="text-sm font-medium ms-3">active</span>
+                      </label>
+                </div>
+                <button type="submit" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">создавать</button>
+           </form>
+           @if ($errors->any())
+           @foreach ($errors->all() as $error)
+               <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                   <span class="font-medium">{{$error}}</span>
+               </div>
+           @endforeach
+       @endif
         </div>
-        <form method="POST" action="{{route('poem.store')}}" class="flex flex-col w-full gap-2 px-12 py-2">
-            @csrf
-            <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                    <label for="name_tm" class="block mb-2 font-medium text-[18px]">Название стихотворения тм</label>
-                    <input type="text" id="name_tm" name="name_tm" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Название стихотворения тм" required />
-                </div>
-                <div>
-                    <label for="name_ru" class="block mb-2 font-medium text-[18px]">Название стихотворения ру</label>
-                    <input type="text" id="name_ru" name="name_ru" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Название стихотворения ру" required />
-                </div>
-            </div>
-            <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                    <label for="text_tm" class="block mb-2 font-medium">стихотворения тм</label>
-                    <textarea class="text_tm" id="text_tm" name="text_tm" placeholder="стихотворения тм..." required></textarea>
-                </div>
-                <div>
-                    <label for="text_ru" class="block mb-2 font-medium">стихотворения ру</label>
-                    <textarea class="text_ru" id="text_ru" name="text_ru" placeholder="стихотворения ру..." required></textarea>
-                </div>
-            </div>
-            <div class="grid gap-6 md:grid-cols-2">
-                <div>
-                    <label for="author_name_tm" class="block mb-2 font-medium text-[18px]">имя автора тм</label>
-                    <input type="text" id="author_name_tm" name="author_tm" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="имя автора тм" required />
-                </div>
-                <div>
-                    <label for="author_name_ru" class="block mb-2 font-medium text-[18px]">имя автора ру</label>
-                    <input type="text" id="author_name_ru" name="author_ru" class="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="имя автора ru" required />
-                </div>
-            </div>
-            <div>
-                <label class="inline-flex items-center cursor-pointer">
-                    <input type="checkbox" name="status" class="sr-only peer" checked>
-                    <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-                    <span class="text-sm font-medium ms-3">active</span>
-                  </label>
-            </div>
-            <button type="submit" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">создавать</button>
-       </form>
     </div>
+   
+    
 </div>
 
 {{-- <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script> --}}
@@ -69,12 +74,12 @@ tinymce.init({
 </script> 
 <script>
     function hideModal() {
-        window.show();//sidebar
+        // window.show();//sidebar
         const element = document.getElementById("modal_poem");  // Get the DIV element
         element.style.display = "none"; // Remove mystyle class from DIV
     }
     function showModal() {
-        window.hide();//sidebarr
+        // window.hide();//sidebarr
         const element = document.getElementById("modal_poem");  // Get the DIV element
         element.style.display = "block"; // Remove mystyle class from DIV
     }

@@ -28,19 +28,6 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/admin/home';
 
-    public function username()
-    {
-        return 'username';
-    }
-
-    protected function validateLogin(Request $request)
-{
-    $request->validate([
-        'username' => 'required|string',
-        'password' => 'required|string',
-    ]);
-}
-
     /** 
      * Create a new controller instance.
      *

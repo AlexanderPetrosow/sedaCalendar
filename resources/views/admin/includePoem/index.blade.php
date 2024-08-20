@@ -1,7 +1,7 @@
 
 
-<div class="w-full relative overflow-x-auto shadow-md sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+<div class="relative w-full h-full mt-2 overflow-y-auto shadow-md custom-scrollbar sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 rtl:text-right">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
                 <th scope="col" class="px-6 py-4">Id</th>
@@ -24,32 +24,34 @@
         </thead>
         <tbody>
             @foreach ($poems as $poem)
-            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <tr class="border-b odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 dark:border-gray-700">
                 <th class="px-6 py-4">{{ $loop->iteration }}</th>
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ $poem['name_'.app()->getLocale()] }}
                 </th>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 overflow-hidden line-clamp">
                     {!! $poem['text_'.app()->getLocale()] !!}
+                    
                 </td>
                 <td class="px-6 py-4">
                     {{ $poem['author_'.app()->getLocale()] }}
                 </td>
                 <td class="px-6 py-4">
-                    @if($poem->status == true)
-                        <a href="{{route('poem.active',['poem' => $poem->id])}}">
-                            <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">active</button>
-                        </a>
-                    @else
-                        <a href="{{route('poem.active',['poem' => $poem->id])}}">
-                            <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">activate</button>
-                        </a>
-                    @endif
+                    <form action="{{ route('poem.active', ['poem' => $poem->id])}}" 
+                        method="post">
+                        @csrf
+                        @method('PUT')
+                        <label class="inline-flex items-center cursor-pointer relative w-[168px]">
+                            <input type="checkbox" name="status" @if($poem->status) checked @endif class="sr-only peer">
+                            <div class="relative w-11 h-6 bg-red-600 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                            <button type="submit" class="w-[45px] h-[25px] absolute top-0"></button>{{-- image activate and disactivate button --}}
+                        </label>
+                    </form>
                 </td>
-                <td class=" flex gap-4 px-6 py-4">
+                <td class="flex gap-4 px-6 py-4 ">
                     <a href="{{route('poem.edit',['poem' => $poem->id])}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                         <button class="flex p-2.5 bg-blue-500 rounded-xl hover:rounded-3xl hover:bg-blue-600 transition-all duration-300 text-white">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                             </svg>
                         </button>

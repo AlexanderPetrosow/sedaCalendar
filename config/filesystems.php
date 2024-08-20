@@ -56,6 +56,13 @@ return [
             'throw' => false,
         ],
 
+        'audio_uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/audio'),
+            'url' => env('APP_URL') . '/storage/uploads/audio',
+            'visibility' => 'public',
+        ],
+
     ],
 
     /*

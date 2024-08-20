@@ -8,7 +8,7 @@
                 Создание стихотворения
             </span>
         </div>
-        <form method="POST" action="{{route('poem.update')}}" class="w-full py-2 px-12 flex flex-col gap-2">
+        <form method="POST" action="{{route('poem.update')}}" class="w-full py-2 px-12 flex flex-col gap-2" novalidate>
             @csrf
             <input class="hidden" type="number" name="id" value="{{$poem->id}}">
             <div class="grid gap-6 md:grid-cols-2">
@@ -57,15 +57,17 @@
     </div>
 </div>
 
-<script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script>
+{{-- <script src="{{ asset('node_modules/tinymce/tinymce.js') }}"></script> --}}
 <script>
 tinymce.init({
     selector:'textarea.text_tm',
+    license_key: 'glpvuu4bgw2i0d17uizamjpfwjswu59kbeacaefftswsyuty',
     maxwidth: 600,
     height: 300
 });
 tinymce.init({
     selector:'textarea.text_ru',
+    license_key: 'glpvuu4bgw2i0d17uizamjpfwjswu59kbeacaefftswsyuty',
     maxwidth: 600,
     height: 300
 });

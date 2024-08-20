@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('author_tm');
             $table->string('author_ru');
             $table->boolean('status')->default(true);
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

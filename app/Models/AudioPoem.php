@@ -12,7 +12,17 @@ class AudioPoem extends Model
     protected $fillable = [
         'name_tm',
         'name_ru',
-        'filename',
-        'status'
+        'audio',
+        'status',
+        'order'
     ];
+
+
+    public function getAudio(){
+        if(file_exists(public_path('/storage/uploads/audio/'.$this->audio)) && !is_null($this->audio)){
+            return asset('/storage/uploads/audio/'.$this->audio);
+        }else{
+            return null;
+        }
+    }
 }

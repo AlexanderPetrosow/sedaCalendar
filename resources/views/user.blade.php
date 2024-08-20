@@ -24,11 +24,15 @@
                 1940-1975
             </span>
         </div>
+        <div id="poems" class="mb-4"></div>
     </div>
     <div class="flex flex-col gap-12 px-2">
+        
         @include('userPages.poems')
         @include('userPages.audioPoem')
         @include('userPages.galleries')
+
+
         <div class="footer h-[100px] w-full flex justify-center items-center ">
             <h1 class="text-black text-[28px]">
                 Arassa Nusga

@@ -2,13 +2,18 @@
 
 @section('content')
 <div class="relative flex flex-col items-center w-full h-full p-12">
-    <div class="w-full">
-        <span class="text-[#1D1B31] text-2xl font-bold">{{ __('nav.poems') }}</span>
+
+    <div class="flex justify-start w-full">
+        <span class="text-[#1D1B31] text-[28px] font-bold">{{__('nav.poems')}}</span>
     </div>
-    <div class="flex justify-end w-full mt-4 space-x-2">
-        <button onclick="showModal()" class="bg-blue-700 text-white hover:bg-blue-800 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5">создавать</button>
-        <button class="bg-white text-gray-900 border border-gray-300 hover:bg-gray-100 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5">порядок</button>
+    <div class="w-full h-[100px]">
+        <div class="flex flex-row-reverse">
+            <button onclick="showModal()" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">создавать</button>
+            <button  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">порядок</button>
+        </div>
     </div>
+
+
     @include('./admin/includePoem.index')
 
     @if(isset($poem->showEdit))

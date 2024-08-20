@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ImageRequest extends FormRequest
+class AudioPoemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +23,10 @@ class ImageRequest extends FormRequest
     {
         $this['status'] = $this->status ? true : false;
         return [
-            // 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240',
-            'image' => 'required|array',
-            'image.*' => 'image|mimes:webp,jpeg,png,jpg,gif,tif,svg|max:10240',
-            'status' => 'required'
+            'name_tm' => 'required|string',
+            'name_ru' => 'required|string',
+            'audio' => 'required|max:10240',
+            'status' => 'required|boolean',
         ];
     }
 }

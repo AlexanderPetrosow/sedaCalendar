@@ -68,12 +68,16 @@
                             <div id="languageDropdown" class="absolute right-0 w-full m-0 text-white origin-top-right bg-gray-600 rounded-none shadow-lg md:text-inherit md:bg-white md:rounded-md md:mt-2 md:hidden ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="languageButton">
                             <div class="p-2 md:px-0 md:py-1" role="none">
                                 @if (app()->getLocale() == 'tm')
-                                    <a href="locale/tm" class="block px-4 py-2 text-sm bg-gray-400 rounded md:bg-inherit md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">TM</a>
+                                    <a href="locale/tm" class="block px-4 py-2 text-sm bg-gray-400 rounded md:bg-inherit md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                        TM
+                                    </a>
                                     <a href="locale/ru" class="block px-4 py-2 text-sm rounded md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">
                                         RU
                                     </a>
                                 @else
-                                    <a href="locale/tm" class="block px-4 py-2 text-sm rounded md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">TM</a>
+                                    <a href="locale/tm" class="block px-4 py-2 text-sm rounded md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">
+                                        TM
+                                    </a>
                                     <a href="locale/ru" class="block px-4 py-2 text-sm bg-gray-400 rounded md:bg-inherit md:hover:bg-gray-100 hover:text-gray-900" role="menuitem">
                                         RU
                                     </a>

@@ -3,77 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiple Audio Players</title>
+    <title>Gurbannazar Ezizow</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="{{  asset('icons/logo.png')}}" type="image/x-icon">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body class="flex flex-col items-center justify-center h-screen space-y-4 bg-gray-900">
+    {{-- fonts --}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Esteban&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        .poem-font {
+            font-family: "Playfair Display", serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+        }
+    </style>
 
-    <div class="w-full p-1 text-white bg-gray-800 rounded-lg shadow-lg">
-        <div class="flex flex-row items-center justify-between pl-1">
-                <div id="playPauseBtn" style="background-image:url({{asset('images/G_Ezizow3.jpeg')}})" class="flex items-center justify-center p-3 text-white bg-cover rounded-sm hover:bg-green-600 focus:outline-none">
-                    <i id="playIcon" class='bx bx-play-circle text-[28px] opacity-60'></i>
-                    <i id="pauseIcon" class='hidden bx bx-pause text-[28px]'></i>
-                </div>
-            <div class="items-start flex-1 pl-4">
-                <p class="text-sm text-gray-400">Song Title - Artist</p>
-                <div class="relative">
-                    <input id="progressBar" type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer">
-                    <span id="current-time">00:00</span> / <span id="duration">00:00</span> 
-                </div>
+</head>
+<body class="flex flex-col justify-center h-screen space-y-4 bg-gray-50">
+
+<div class="container poem-font w-full h-full flex gap-10 flex-col relative pt-0">
+    <a href="{{route('main')}}">
+        <div class="absolute top-2 md:top-5 left-5 md:left-20 w-[120px]">
+            <img class="bg-cover" src="{{asset('icons/logo.png')}}" alt="">
+        </div>
+    </a>
+    <div class="w-full flex flex-col items-center">
+        <div>
+            <span class="text-[30px] font-samibold">Gurbannazar Ezizow</h1>
+        </div>
+        <div class="indent-24 text-[20px] opacity-70">
+            <p>Goşgular ýygyndysy</p>
+        </div> 
+    </div>
+    <div>
+
+    <div class="text-center pt-6 mb-24">
+
+        <div>
+            <div class="text-[26px] mb-6 font-semibold">
+                <p>Adam ölýär, Şeýdip ýapylýar perde...</p>
             </div>
         </div>
-        <audio id="audioPlayer" src="{{asset('files/audio.mp3')}}"></audio>
+        <div>
+
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Adam &ouml;l&yacute;&auml;r,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Şe&yacute;dip &yacute;apyl&yacute;ar perde.</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">&Ouml;len d&auml;l,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">diriler gal&yacute;arlar derde.</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">&Yacute;&ouml;ne &ouml;len adam</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">&ouml;lerine &ccedil;en</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Tanyş&yacute;ar d&uuml;n&yacute;&auml;niň ge&ccedil;mişi bilen.</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Gije-g&uuml;ndiz kitaplara bolup &yacute;ar,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Ge&ccedil;miş bilen-taryh bilen &yacute;aşa&yacute;ar</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Gomer bilen &yacute;aşa&yacute;ar,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Ba&yacute;ron bilen &yacute;aşa&yacute;ar,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Pyragy, Lenin bilen &mdash;</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Bary bilen &yacute;aşa&yacute;ar!</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Bulam az de&yacute; ol otur&yacute;ar o&yacute;lanyp,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Soňra gelejege &ccedil;yk&yacute;ar a&yacute;lanyp.</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">En&ccedil;e &yacute;yldyzlaryň d&uuml;n&yacute;esin a&ccedil;&yacute;ar,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Soň ol &yacute;yldyz bolup, s&uuml;&yacute;n&yacute;&auml;r-de ge&ccedil;&yacute;&auml;r.</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">&nbsp;</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Adam &ouml;l&yacute;&auml;r,</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Şe&yacute;dip &yacute;apyl&yacute;ar perde.</p>
+            <p style="box-sizing: border-box; margin: 0px; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">Adam az &yacute;aşa&yacute;ar</p>
+            <p style="box-sizing: border-box; margin: 0px; cursor: default; color: #080808; font-family: Georgia, serif; font-size: 17.6px; word-spacing: 1px; white-space-collapse: preserve;">K&auml;n &yacute;aşan &Yacute;erde.</p>
+
+        </div>
+
+       
     </div>
 
-    <!-- Add more audio players similarly by duplicating the above div -->
-
-<script>
-    
-    const audioPlayer = document.getElementById('audioPlayer');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const playIcon = document.getElementById('playIcon');
-    const pauseIcon = document.getElementById('pauseIcon');
-    const progressBar = document.getElementById('progressBar');
-    const currentTimeEl = document.getElementById('current-time');
-    const durationEl = document.getElementById('duration');
-
-    function formatTime(time) {
-        const minutes = Math.floor(time / 60);
-        const seconds = Math.floor(time % 60);
-        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-
-    audioPlayer.addEventListener('loadedmetadata', () => {
-        durationEl.textContent = formatTime(audioPlayer.duration);
-        progressBar.max = audioPlayer.duration;
-    });
-
-    playPauseBtn.addEventListener('click', () => {
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            playIcon.classList.add('hidden');
-            pauseIcon.classList.remove('hidden');
-        } else {
-            audioPlayer.pause();
-            playIcon.classList.remove('hidden');
-            pauseIcon.classList.add('hidden');
-        }
-    });
-
-    audioPlayer.addEventListener('timeupdate', () => {
-        const currentTime = audioPlayer.currentTime;
-        const duration = audioPlayer.duration;
-        const progress = (currentTime / duration) * 100;
-        progressBar.value = progress;
-        currentTimeEl.textContent = formatTime(currentTime);
-    });
-
-    progressBar.addEventListener('input', () => {
-        const seekTime = (progressBar.value / 100) * audioPlayer.duration;
-        audioPlayer.currentTime = seekTime;
-    });
-</script>
+</div>
 
 </body>
 </html>

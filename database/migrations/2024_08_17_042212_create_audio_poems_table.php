@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name_tm');
             $table->string('name_ru');
-            $table->string('filename');
+            $table->string('audio');
             $table->boolean('status')->default(true);
+            $table->integer('order')->default(0);
             $table->timestamps();
         });
     }

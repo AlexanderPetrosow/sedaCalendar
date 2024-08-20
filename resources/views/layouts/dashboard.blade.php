@@ -5,13 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Dashboard') }}</title>
+    <link rel="shortcut icon" href="{{  asset('icons/logo.png')}}" type="image/x-icon">
 
     <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.4.1/tinymce.min.js" integrity="sha512-c46AnRoKXNp7Sux2K56XDjljfI5Om/v1DvPt7iRaOEPU5X+KZt8cxzN3fFzemYC6WCZRhmpSlZvPA1pttfO9DQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+
+        *{
+            font-family: "Nunito", serif;
+            font-optical-sizing: auto;
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        .lang-col{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+        }
+        .line-clamp {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+        .custom-scrollbar {
+            scrollbar-width: thin;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -22,10 +48,10 @@
                         <div class="logo">
                             <a href="{{route('admin.home')}}">
                                 <div class="logo_name w-[126px] h-auto">
-                                    <img src="{{asset('images/logo.png')}}" alt="">
+                                    <img src="{{asset('icons/logo.png')}}" alt="">
                                 </div>
                             </a>
-                        </div>
+                        </div>                        
                         <div id="hide">
                             <i  class="cursor-pointer bx bx-menu" id="btn" onclick="hide()"></i>
                         </div>
@@ -35,45 +61,44 @@
                     </div>
                     <ul class="capitalize nav_list">
                         <li>
-                            <a href="{{route('admin.poem')}}">
-                                <i class="bx bxs-dashboard"></i>
-                                <span class="links_name">{{__('nav.poems')}}</span>
+                            <a class="{{ Request::routeIs('admin.poem') ? 'bg-[#fff]' : '' }}" href="{{route('admin.poem')}}">
+                                <i class="bx bxs-dashboard {{ Request::routeIs('admin.poem') ? 'text-[#11101d]' : '' }}"></i>
+                                <span  class="links_name {{ Request::routeIs('admin.poem') ? 'text-[#11101d]' : '' }}">{{__('nav.poems')}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.audioPoem')}}"> 
-                                <i class='bx bx-music' ></i>
-                                <span class="links_name">{{__('nav.audio_poems')}}</span>
+                            <a class="{{ Request::routeIs('admin.audioPoem') ? 'bg-[#fff]' : '' }}" href="{{route('admin.audioPoem')}}"> 
+                                <i class="bx bx-music {{ Request::routeIs('admin.audioPoem') ? 'text-[#11101d]' : '' }}" ></i>
+                                <span class="links_name {{ Request::routeIs('admin.audioPoem') ? 'text-[#11101d]' : '' }}">{{__('nav.audio_poems')}}</span>
                             </a>
                         </li>
                         <li>
-                            <a href="{{route('admin.gallery')}}">
-                                <i class='bx bx-photo-album' ></i>
-                                <span class="links_name">{{__('nav.galleries')}}</span>
+                            <a class="{{ Request::routeIs('admin.gallery') ? 'bg-[#fff]' : '' }}" href="{{route('admin.gallery')}}">
+                                <i class='bx bx-photo-album {{ Request::routeIs('admin.gallery') ? 'text-[#11101d]' : '' }}' ></i>
+                                <span class="links_name {{ Request::routeIs('admin.gallery') ? 'text-[#11101d]' : '' }}">{{__('nav.galleries')}}</span>
                             </a>
                         </li>
                         @if(auth()->user()->is_admin === 1)
-                        <li>
-                            <a href="{{route('admin.controll')}}">
-                                <i class='bx bx-user-plus'></i>
-                                <span class="links_name">{{__('nav.create_admin')}}</span>
-                            </a>
-                        </li>
-                        @endif
-                        
+                            <li>
+                                <a class="{{ Request::routeIs('admin.controll') ? 'bg-[#fff]' : '' }}" href="{{route('admin.controll')}}">
+                                    <i class='bx bx-user-plus {{ Request::routeIs('admin.controll') ? 'text-[#11101d]' : '' }}'></i>
+                                    <span class="links_name {{ Request::routeIs('admin.controll') ? 'text-[#11101d]' : '' }}">{{__('nav.create_admin')}}</span>
+                                </a>
+                            </li>
+                        @endif 
                     </ul>
                     <div class="profile_content">
-                        <div class="flex flex-row justify-start w-full gap-4 m-4">
-                            <div>
-                                <a href="{{route('change.locale',['lang'=>'tm'])}}">
+                        <div id="langCol" class="flex flex-row flex-wrap w-full mb-4">
+                            <div class="w-[48%] flex flex-row justify-center items-center">
+                                <a class="{{app()->getLocale() == 'tm' ? 'border-b-2' : ''}} pb-3 px-1" href="{{route('change.locale',['lang'=>'tm'])}}">
                                     <div>
-                                        <i class='bx bx-world'>TM</i>
+                                        <i class='bx bx-world text-nowrap'> TM  </i>
                                     </div>
                                 </a>
                             </div>
-                            <div>
-                                <a href="{{route('change.locale',['lang' => 'ru'])}}">
-                                    <i class='bx bx-world'>RU</i>
+                            <div class="w-[48%] flex justify-center items-center">
+                                <a class="{{app()->getLocale() == 'ru' ? 'border-b-2' : ''}} pb-3 px-1" href="{{route('change.locale',['lang' => 'ru'])}}">
+                                    <i class='bx bx-world text-nowrap'> RU</i>
                                 </a>
                             </div>
                         </div>
@@ -86,8 +111,7 @@
                                             <div class="job">Super admin</div>
                                         @else
                                             <div class="job">Admin</div>
-                                        @endif
-                                        
+                                        @endif 
                                 </div>
                             </div>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -114,11 +138,17 @@
     element.classList.remove("activeClass"); // Remove mystyle class from DIV
     document.getElementById("hide").style.display='none';
     document.getElementById("show").style.display='block';
+
+    const langDiv = document.getElementById("langCol");
+    langDiv.classList.add('lang-col');
     }
     function show() {
     const element = document.getElementById("removeClass");  // Get the DIV element
     element.classList.add("activeClass"); // Remove mystyle class from DIV
     document.getElementById("hide").style.display='block';
     document.getElementById("show").style.display='none';
+
+    const langDiv = document.getElementById("langCol");
+    langDiv.classList.remove('lang-col');
     }
 </script>

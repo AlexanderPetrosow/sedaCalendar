@@ -1,41 +1,49 @@
 <?php
 
-use App\Http\Controllers\ImageController;
+
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ImageController;
+use App\Http\Controllers\Admin\PoemController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Auth\PanelController;
-use App\Http\Controllers\PoemController;
-use App\Http\Controllers\SongController;
+use App\Http\Controllers\Admin\AudioPoemController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [UserController::class,'index'])->name('main');
+Route::get('/show-poem/{poem}',[UserController::class,'showPoem'])->name('show-poem');
 Route::get('/test',function(){
     return view('test');
 });
 Route::get("/locale/{lang}",[LanguageController::class,'changeLang'])->name('change.locale');
-
-Auth::routes();
 Route::get('/panel',PanelController::class)->name('panel');
+Auth::routes();
+
 
 
 Route::middleware('auth')->group(function (){
-    Route::get('/admin/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('admin.home');
+    Route::get('/admin/home', [HomeController::class, 'index'])->name('admin.home');
 
-    Route::get('/admin/poem', [App\Http\Controllers\Admin\PoemController::class, 'index'])->name('admin.poem');
-    Route::post('/admin/poem/store', [App\Http\Controllers\Admin\PoemController::class, 'store'])->name('poem.store');
-    Route::get('/admin/poem/edit/{poem}', [App\Http\Controllers\Admin\PoemController::class, 'edit'])->name('poem.edit');
-    Route::post('/admin/poem/update', [App\Http\Controllers\Admin\PoemController::class, 'update'])->name('poem.update');
-    Route::get('/admin/poem/active/{poem}', [App\Http\Controllers\Admin\PoemController::class, 'active'])->name('poem.active');
-    Route::delete('/admin/poem/delete/{poem}', [App\Http\Controllers\Admin\PoemController::class, 'destroy'])->name('poem.delete');
+    Route::get('/admin/poem', [PoemController::class, 'index'])->name('admin.poem');
+    Route::post('/admin/poem/store', [PoemController::class, 'store'])->name('poem.store');
+    Route::get('/admin/poem/edit/{poem}', [PoemController::class, 'edit'])->name('poem.edit');
+    Route::post('/admin/poem/update', [PoemController::class, 'update'])->name('poem.update');
+    Route::put('/admin/poem/active/{poem}', [PoemController::class, 'active'])->name('poem.active');
+    Route::delete('/admin/poem/delete/{poem}', [PoemController::class, 'destroy'])->name('poem.delete');
 
-    Route::get('/admin/audio-poem', [App\Http\Controllers\Admin\SongController::class, 'index'])->name('admin.audioPoem');
+    Route::get('/admin/audio-poem', [AudioPoemController::class, 'index'])->name('admin.audioPoem');
+    Route::put('/admin/audio-poem/active/{audioPoem}', [AudioPoemController::class, 'active'])->name('audioPoem.active');
+    Route::post('/admin/audio-poem/store', [AudioPoemController::class, 'store'])->name('audioPoem.store');
+    Route::delete('/admin/audio-poem/delete/{audioPoem}', [AudioPoemController::class, 'destroy'])->name('audioPoem.delete');
 
-    Route::get('/admin/gallery', [App\Http\Controllers\Admin\ImageController::class, 'index'])->name('admin.gallery');
+    Route::get('/admin/gallery', [ImageController::class, 'index'])->name('admin.gallery');
+    Route::post('/admin/gallery/store', [ImageController::class, 'store'])->name('gallery.store');
+    Route::put('/admin/gallery/{image}', [ImageController::class, 'update'])->name('image.update');
+    Route::delete('/admin/gallery/{image}', [ImageController::class, 'destroy'])->name('image.delete');
 
     Route::get('/admin/controll',[UserController::class,'admins'])->name('admin.controll');
     Route::post('/admin/create',[UserController::class,'create'])->name('admin.create');
-
 });
 
 
