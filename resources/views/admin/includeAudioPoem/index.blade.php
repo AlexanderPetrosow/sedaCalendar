@@ -4,24 +4,33 @@
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-                <th scope="col" class="px-2 py-3">
-                    audio
+                <th class="px-6 py-4">
+                    id
                 </th>
-                <th scope="col" class="px-2 py-3">
-                    name of poem
+                <th scope="col" class="px-6 py-4">
+                    @lang('nav.audio_poems')
                 </th>
-                <th scope="col" class="px-2 py-3">
-                    status
+                <th scope="col" class="px-6 py-4">
+                    @lang('nav.name_of_poems')
                 </th>
-                <th scope="col" class="px-2 py-3">
-                    Delete
+                <th scope="col" class="px-6 py-4">
+                    {{__('nav.status')}}
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    @lang('nav.order')
+                </th>
+                <th scope="col" class="px-6 py-4">
+                    {{__('nav.actions')}}
                 </th>
             </tr>
         </thead>
         <tbody>
             @foreach ($audios as $audio)
             <tr class="bg-white border-b hover:bg-gray-50 ">
-                <th  class="p-2 ">
+                <td class="px-6 py-4">
+                    {{ $audio->id }}
+                </td>
+                <td  class="px-6 py-4 ">
                     <div data-audio-src="{{ $audio->getAudio() }}" class="p-1 text-white rounded-lg shadow-lg audio-player" >
                         <div class="flex flex-row items-center justify-between pl-1">
                                 <div style="background-image:url({{asset('images/G_Ezizow3.jpeg')}})" class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:bg-green-600 focus:outline-none">
@@ -31,13 +40,13 @@
                             <div class="items-start flex-1 pl-4">
                                 <p class="text-sm text-gray-400 text-nowrap">{{ $audio['name_'.app()->getLocale()] }}</p>
                                 <div class="relative text-gray-400">
-                                    <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer progressBar">
+                                    <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-400 rounded-lg appearance-none cursor-pointer progressBar">
                                     <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
                                 </div>
                             </div>
                         </div>
                     </div>
-                </th>
+                </td>
                 <td class="px-6 py-4">
                     {{$audio["name_".app()->getLocale()]}}
                 </td>
@@ -53,19 +62,34 @@
                         </label>
                     </form>
                 </td>
+
+                <td class="px-6 py-4">
+                    {{ $audio->order }}
+                </td>
                 
                 <td class="px-6 py-3">
-                    {{-- <a href="#" class="font-medium ">Edit</a> --}}
-                    @if(auth()->user()->is_admin == 1)
-                        <form action="{{ route('audioPoem.delete', ['audioPoem' => $audio->id])}}" 
-                            method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
-                                <i class='h-6 w-6 text-[24px] bx bx-trash'></i>
-                            </button>
-                        </form>
-                    @endif
+                    <div class="flex flex-row gap-1">
+                        <a href="{{route('audioPoem.edit',['audioPoem' => $audio->id])}}">
+                            <div>
+                                <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300">
+                                    <i class='bx bx-edit text-[24px]'></i>
+                                </button>
+                            </div>
+                        </a>
+                        <div>
+                            @if(auth()->user()->is_admin == 1)
+                                <form action="{{ route('audioPoem.delete', ['audioPoem' => $audio->id])}}" 
+                                    method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="flex p-2.5 rounded-xl transition-all duration-300 text-red-600">
+                                        <i class='text-[24px] bx bx-trash'></i>
+                                    </button>
+                                </form>
+                            @endif
+                        </div> 
+                    </div>
+                                       
                 </td>
             </tr>
             @endforeach

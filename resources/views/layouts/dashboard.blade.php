@@ -43,14 +43,16 @@
     <div id="app">
         <main>
             <div class="w-full h-full dashboard-body">
-                <div id="removeClass" class="z-50 sidebar activeClass">
+                <div id="removeClass" class="z-50 sidebar activeClass relative">
+                    <a href="{{route('admin.home')}}">
+                        <div class="absolute top-1 left-4 w-28  h-10 ">
+                        </div>
+                    </a>
                     <div class="logo_content">
                         <div class="logo">
-                            <a href="{{route('admin.home')}}">
-                                <div class="logo_name w-[126px] h-auto">
-                                    <img src="{{asset('icons/logo.png')}}" alt="">
-                                </div>
-                            </a>
+                            <div class="logo_name w-[126px] h-auto">
+                                <img src="{{asset('icons/logo.png')}}" alt="">
+                            </div>
                         </div>                        
                         <div id="hide">
                             <i  class="cursor-pointer bx bx-menu" id="btn" onclick="hide()"></i>
@@ -61,28 +63,28 @@
                     </div>
                     <ul class="capitalize nav_list">
                         <li>
-                            <a class="{{ Request::routeIs('admin.poem') ? 'bg-[#fff]' : '' }}" href="{{route('admin.poem')}}">
-                                <i class="bx bxs-dashboard {{ Request::routeIs('admin.poem') ? 'text-[#11101d]' : '' }}"></i>
-                                <span  class="links_name {{ Request::routeIs('admin.poem') ? 'text-[#11101d]' : '' }}">{{__('nav.poems')}}</span>
+                            <a class="{{ Request::is('admin/poem*') ? 'bg-[#fff]' : '' }}" href="{{route('admin.poem')}}">
+                                <i class="bx bx-book-open {{ Request::is('admin/poem*') ? 'text-[#11101d]' : '' }}"></i>
+                                <span  class="links_name {{ Request::is('admin/poem*') ? 'text-[#11101d]' : '' }}">{{__('nav.poems')}}</span>
                             </a>
                         </li>
                         <li>
-                            <a class="{{ Request::routeIs('admin.audioPoem') ? 'bg-[#fff]' : '' }}" href="{{route('admin.audioPoem')}}"> 
-                                <i class="bx bx-music {{ Request::routeIs('admin.audioPoem') ? 'text-[#11101d]' : '' }}" ></i>
-                                <span class="links_name {{ Request::routeIs('admin.audioPoem') ? 'text-[#11101d]' : '' }}">{{__('nav.audio_poems')}}</span>
+                            <a class="{{ Request::is('admin/audio-poem*') ? 'bg-[#fff]' : '' }}" href="{{route('admin.audioPoem')}}"> 
+                                <i class="bx bx-music {{ Request::is('admin/audio-poem*') ? 'text-[#11101d]' : '' }}" ></i>
+                                <span class="links_name {{ Request::is('admin/audio-poem*') ? 'text-[#11101d]' : '' }}">{{__('nav.audio_poems')}}</span>
                             </a>
                         </li>
                         <li>
-                            <a class="{{ Request::routeIs('admin.gallery') ? 'bg-[#fff]' : '' }}" href="{{route('admin.gallery')}}">
-                                <i class='bx bx-photo-album {{ Request::routeIs('admin.gallery') ? 'text-[#11101d]' : '' }}' ></i>
-                                <span class="links_name {{ Request::routeIs('admin.gallery') ? 'text-[#11101d]' : '' }}">{{__('nav.galleries')}}</span>
+                            <a class="{{ Request::is('admin/gallery*') ? 'bg-[#fff]' : '' }}" href="{{route('admin.gallery')}}">
+                                <i class='bx bx-photo-album {{ Request::is('admin/gallery*') ? 'text-[#11101d]' : '' }}' ></i>
+                                <span class="links_name {{ Request::is('admin/gallery*') ? 'text-[#11101d]' : '' }}">{{__('nav.galleries')}}</span>
                             </a>
                         </li>
                         @if(auth()->user()->is_admin === 1)
                             <li>
-                                <a class="{{ Request::routeIs('admin.controll') ? 'bg-[#fff]' : '' }}" href="{{route('admin.controll')}}">
-                                    <i class='bx bx-user-plus {{ Request::routeIs('admin.controll') ? 'text-[#11101d]' : '' }}'></i>
-                                    <span class="links_name {{ Request::routeIs('admin.controll') ? 'text-[#11101d]' : '' }}">{{__('nav.create_admin')}}</span>
+                                <a class="{{ Request::is('admin/controll*') ? 'bg-[#fff]' : '' }}" href="{{route('admin.controll')}}">
+                                    <i class='bx bx-user-plus {{ Request::is('admin/controll*') ? 'text-[#11101d]' : '' }}'></i>
+                                    <span class="links_name {{ Request::is('admin/controll*') ? 'text-[#11101d]' : '' }}">{{__('nav.create_admin')}}</span>
                                 </a>
                             </li>
                         @endif 

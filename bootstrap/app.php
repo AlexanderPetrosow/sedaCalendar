@@ -14,11 +14,10 @@ return Application::configure(basePath: dirname(__DIR__))
         // $middleware->alias([
         //     'auth_check' => \App\Http\Middleware\isSuperAdmin::class,
         // ]);
+        
         $middleware->web(append:[
             App\Http\Middleware\Localization::class,
         ]);
-
-        // $middleware->append();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

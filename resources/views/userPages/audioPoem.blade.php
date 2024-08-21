@@ -3,34 +3,15 @@
         <p class="uppercase text-[26px]">@lang('nav.audio_poems')</p>
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-2 md:justify-between">
-        @if(count($audios) > 0)
-            @foreach($audios as $audio)
-            <div data-audio-src="{{ $audio->getAudio() }}" class="w-full md:w-[49%] p-1 text-white bg-gray-400 rounded-lg shadow-lg audio-player" >
-                <div class="flex flex-row items-center justify-between pl-1">
-                        <div style="background-image:url({{asset('images/G_Ezizow3.jpeg')}})" class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:bg-green-600 focus:outline-none">
-                            <i class='playIcon bx bx-play-circle text-[28px] opacity-60'></i>
-                            <i class='pauseIcon hidden bx bx-pause text-[28px]'></i>
-                        </div>
-                    <div class="items-start flex-1 pl-4">
-                        <p class="text-sm text-gray-400">{{ $audio['name_'.app()->getLocale()] }}</p>
-                        <div class="relative">
-                            <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer progressBar">
-                            <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        @endif
-
-        <div data-audio-src="{{ asset('files/audio2.mp3') }}" class="w-full md:w-[49%] p-1 text-white bg-gray-400 rounded-lg shadow-lg audio-player" >
+        @foreach($audios as $audio)
+        <div data-audio-src="{{ $audio->getAudio() }}" class="w-full md:w-[49%] p-1 text-white bg-gray-400 rounded-lg shadow-lg audio-player" >
             <div class="flex flex-row items-center justify-between pl-1">
                     <div style="background-image:url({{asset('images/G_Ezizow3.jpeg')}})" class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:bg-green-600 focus:outline-none">
                         <i class='playIcon bx bx-play-circle text-[28px] opacity-60'></i>
                         <i class='pauseIcon hidden bx bx-pause text-[28px]'></i>
                     </div>
                 <div class="items-start flex-1 pl-4">
-                    <p class="text-sm text-white">Song Title - Artist</p>
+                    <p class="text-sm text-white">{{ $audio['name_'.app()->getLocale()] }}</p>
                     <div class="relative">
                         <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer progressBar">
                         <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
@@ -38,7 +19,7 @@
                 </div>
             </div>
         </div>
-
+        @endforeach
     </div>
     <div id="galleries" class="w-full mb-10"></div>
 </div>

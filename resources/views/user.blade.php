@@ -27,15 +27,18 @@
         <div id="poems" class="mb-4"></div>
     </div>
     <div class="flex flex-col gap-12 px-2">
-        
-        @include('userPages.poems')
-        @include('userPages.audioPoem')
-        @include('userPages.galleries')
-
-
+        @if(count($poems) > 0)
+            @include('userPages.poems')
+        @endif
+        @if(count($audios) > 0)
+            @include('userPages.audioPoem')
+        @endif
+        @if(count($images) > 0)
+            @include('userPages.galleries')
+        @endif
         <div class="footer h-[100px] w-full flex justify-center items-center ">
             <h1 class="text-black text-[28px]">
-                Arassa Nusga
+               
             </h1>
         </div>
     </div>

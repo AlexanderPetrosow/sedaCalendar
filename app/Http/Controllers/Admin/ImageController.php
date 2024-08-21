@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ImageController extends Controller
 {
     public function index(){
-        $images = Image::orderBy("created_at","desc")->get();
+        $images = Image::orderBy("id")->get();
         return view("admin.gallery", compact("images"));
     }
 

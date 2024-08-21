@@ -1,31 +1,26 @@
 <div id="modal_poem" class="absolute hidden top-0 left-0 flex-col items-center  w-full h-full bg-[#979595c5] text-white py-8 px-8">
-    
     <div class="overflow-hidden overflow-y-auto  bg-[#868e91c5] py-8 relative">
         <div class="absolute top-4 right-4">
-            {{-- <i class='bx bx-x text-[40px] cursor-pointer'></i> --}}
             <i onclick="hideModal()" class='bx bx-x text-[40px] cursor-pointer text-gray-200'></i>
         </div>
         <div class="flex justify-center items-center text-[20px] mb-2">
-            <span class="text-gray-800">
-                Создание аудио стихотворение
+            <span class="text-white">
+                @lang('nav.audio_create')
             </span>
         </div>
         <form action="{{route('audioPoem.store')}}" method="POST" class="flex flex-col gap-4 px-8 py-2" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="grid gap-6 md:grid-cols-2">
                 <div>
-                    {{-- <label for="name_tm" class="block mb-2 font-medium text-[18px]">Название тм</label> --}}
                     <input type="text" id="name_tm" name="name_tm" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="Название тм" required />
                 </div>
                 <div>
-                    {{-- <label for="name_ru" class="block mb-2 font-medium text-[18px]">Название ру</label> --}}
                     <input type="text" id="name_ru" name="name_ru" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="Название ру" required />
                 </div>
             </div>
 
-
             <div >
-                <label for="file"> Goşgy ýüklemek </label>
+                <label for="file"> format mp3 </label>
                 <input id="file" type="file" name="audio" class="flex items-center p-1  w-full text-sm text-gray-900 border border-gray-200 rounded-sm cursor-pointer bg-gray-200 focus:outline-none">
             </div>
 
@@ -36,9 +31,7 @@
                     <span class="text-sm font-medium ms-3">active</span>
                   </label>
             </div>
-
-            <button type="submit" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">создавать</button>
-
+            <button type="submit" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">@lang('nav.create')</button>
        </form>
     </div>
 </div>

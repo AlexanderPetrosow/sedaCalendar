@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PoemController extends Controller
 {
     public function index(){
-        $poems = Poem::all();
+        $poems = Poem::orderBy('id')->get();
         return view("admin.poem",compact("poems"));        
     }
 
@@ -22,15 +22,15 @@ class PoemController extends Controller
 
     public function edit(Poem $poem){
         $poem['showEdit'] = true;
-        $poems = Poem::all();
+        $poems = Poem::orderBy('id')->get(); 
         return view('admin.poem',compact('poem','poems'));
     }
-
     public function update(PoemRequest $request){
-        $poem = Poem::find($request->id);
-        $poem->update($request->all());
+        $poem_req = Poem::find($request->id);
         $poems = Poem::all();
-        return view('admin.poem',compact('poems'))->with('success', 'Poem updated successfully');
+        $this->sortItems($poems, $poem_req->order, $request->order);
+        $poem_req->update($request->all());
+        return redirect()->route('admin.poem');
     }
 
     public function active(Poem $poem){
@@ -45,7 +45,16 @@ class PoemController extends Controller
 
 
     public function destroy(Poem $poem){
-        $poem->delete();
+        
+        $orderDeletedRow = $poem->order;        
+        $delete_success = $poem->delete();
+         // start sorting order
+        if( $delete_success ){
+            $table = Poem::orderBy('order', 'asc')->get();
+            $this->reorderAfterRemoval($table,$orderDeletedRow);
+        }
+        // end sorting order
+
         return redirect()->route('admin.poem');
     }
 }

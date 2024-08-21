@@ -64,3 +64,30 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# SedaCalendar
+
+SedaCalendar is a Laravel-based calendar application. Follow the steps below to set up the project on your local machine.
+
+## Installation
+
+### Step 1: Clone the Repository
+
+First, clone the repository to your local machine using Git.
+
+```bash
+git clone https://github.com/AlexanderPetrosow/sedaCalendar.git
+
+
+composer update
+
+
+ sudo cp .env.example  .env     and change database name 
+
+ php artisan key:generate
+
+ php artisan migrate
+
+ php artisan db:seed
+
+ php artisan storage:link

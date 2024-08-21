@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
-class Controller extends BaseController
+abstract class Controller
 {
     use AuthorizesRequests, ValidatesRequests;
 
@@ -44,6 +42,34 @@ class Controller extends BaseController
         $filePath = 'public/uploads/'.$path .'/' . $file;
         if(Storage::exists($filePath)) {
             Storage::delete($filePath);
+        }
+    }
+
+    public function sortItems($table,$fromOrder,$toOrder){
+        if($fromOrder !== $toOrder){
+            if($fromOrder > $toOrder){
+                for($i = $fromOrder-1; $i >= $toOrder; $i--){
+                    $poem_order_up = $table->where('order',$i)->first();
+                    $poem_order_up->update([
+                        'order' => $poem_order_up->order+1,
+                    ]);
+                }
+            }else{
+                for($i = $fromOrder+1; $i <= $toOrder; $i++){
+                    $poem_order_up = $table->where('order',$i)->first();
+                    $poem_order_up->update([
+                        'order' => $poem_order_up->order - 1,
+                    ]);
+                }
+            }
+        }
+    }
+
+    public function reorderAfterRemoval($table,$orderDeletedRow)
+    {
+        $itemsToUpdate = $table->where('order', '>', $orderDeletedRow);
+        foreach ($itemsToUpdate as $item) {
+            $item->update(['order' => $item->order - 1]);
         }
     }
 

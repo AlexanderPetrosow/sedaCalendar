@@ -22,11 +22,16 @@ class AudioPoemRequest extends FormRequest
     public function rules(): array
     {
         $this['status'] = $this->status ? true : false;
-        return [
+        $data = [
             'name_tm' => 'required|string',
             'name_ru' => 'required|string',
-            'audio' => 'required|max:10240',
+            'audio' => 'nullable|mimes:mp3|max:10240',//10Mb
             'status' => 'required|boolean',
         ];
+
+        if($this->isMethod("post")){
+            $data['audio'] = 'required|mimes:mp3|max:10240';
+        }
+        return $data;
     }
 }
