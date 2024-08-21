@@ -93,7 +93,7 @@
                     </div>
                     <div class="flex justify-between p-2 border-t-2">
                         <div class="flex justify-center flex-1 text-white">
-                            {{$userCount}} admin
+                            {{$userCount - 1}} admin
                         </div>
                         <div class="flex flex-1 justify-center items-center text-white">
                             @if(auth()->user()->is_admin == 1)

@@ -91,3 +91,10 @@ composer update
  php artisan db:seed
 
  php artisan storage:link
+
+  ## to login
+  usn: admin@admin.com  
+  pass: secret
+
+## if not working
+ npm install && npm run build 
