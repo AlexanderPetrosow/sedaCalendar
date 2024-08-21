@@ -32,9 +32,46 @@
                 height: 100%;
                 scroll-behavior: smooth;
             }
+
+            /* loadder start */
+             /* Loader wrapper */
+        #loader-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Spinner style */
+        #loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #3498db;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        /* Spinner animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* loader end */
         </style>
     </head>
     <body class="bg-[#E6DDD4]">
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+        </div>
+        <div id="content">
             <nav id="header" class="sticky top-0 z-50">
                 <div class="container relative flex flex-col items-center justify-between p-4 mx-auto md:static md:flex-row">
                     <div class="flex items-center justify-between w-full md:justify-start">
@@ -59,7 +96,7 @@
                                 </li>
                             </ul>
                         </div>
-                       
+                        
                         <div class="relative z-50 inline-block">
                             <!-- Button to toggle dropdown -->
                             <button id="languageButton" onclick="toggleDropdown()" class="items-center justify-center hidden w-full px-4 py-2 text-sm font-medium text-gray-700 rounded-md shadow-sm md:inline-flex focus:outline-none focus:ring-2 focus:ring-offset-2" aria-haspopup="true" aria-expanded="true">
@@ -93,8 +130,21 @@
                     @yield('content')
                 </div>
             </div>
+        </div>
+        
     </body>
 </html>
+<!-- Optional: jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(window).on('load', function() {
+        $('#loader-wrapper').fadeOut('slow', function() {
+            $('#content').fadeIn('slow');
+        });
+    });
+</script>
+
 <style>
     .heightWithAnimation{
         height: 224px;
