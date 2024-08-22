@@ -50,11 +50,11 @@
 
         /* Spinner style */
         #loader {
-            border: 16px solid #f3f3f3;
+            border: 10px solid #f3f3f3;
             border-radius: 50%;
-            border-top: 16px solid #3498db;
-            width: 120px;
-            height: 120px;
+            border-top: 10px solid #1a8ae6;
+            width: 100px;
+            height: 100px;
             animation: spin 2s linear infinite;
         }
 
@@ -135,7 +135,7 @@
     </body>
 </html>
 <!-- Optional: jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{asset('jquery/jquery.min.js')}}"></script>
 
 <script>
     $(window).on('load', function() {
