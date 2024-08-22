@@ -8,7 +8,7 @@
                 @lang('nav.audio_create')
             </span>
         </div>
-        <form action="{{route('audioPoem.store')}}" method="POST" class="flex flex-col gap-4 px-8 py-2" enctype="multipart/form-data" novalidate>
+        <form action="{{route('audioPoem.store')}}" method="POST" class="flex flex-col gap-4 px-8 py-2" enctype="multipart/form-data">
             @csrf
             <div class="grid gap-6 md:grid-cols-2">
                 <div>
@@ -21,7 +21,7 @@
 
             <div >
                 <label for="file"> format mp3 </label>
-                <input id="file" type="file" name="audio" class="flex items-center p-1  w-full text-sm text-gray-900 border border-gray-200 rounded-sm cursor-pointer bg-gray-200 focus:outline-none">
+                <input id="file" type="file" name="audio" required class="flex items-center w-full p-1 text-sm text-gray-900 bg-gray-200 border border-gray-200 rounded-sm cursor-pointer focus:outline-none">
             </div>
 
             <div class="mt-2">
@@ -33,6 +33,13 @@
             </div>
             <button type="submit" class="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 me-2 mb-2">@lang('nav.create')</button>
        </form>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+                    <span class="font-medium">{{$error}}</span>
+                </div>
+            @endforeach
+        @endif
     </div>
 </div>
 

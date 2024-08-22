@@ -21,13 +21,13 @@
     </style>
 </head>
 <body class="flex flex-col justify-center h-screen space-y-4 bg-gray-50">
-    <div class="container poem-font w-full h-full flex gap-10 flex-col relative pt-0 mx-auto">
+    <div class="container relative flex flex-col w-full h-full gap-10 pt-0 mx-auto poem-font">
         <a href="{{route('main')}}">
             <div class="absolute top-2 md:top-5 left-5 md:left-20 w-[120px]">
                 <img class="bg-cover" src="{{asset('icons/logo.png')}}" alt="">
             </div>
         </a>
-        <div class="w-full flex flex-col items-center">
+        <div class="flex flex-col items-center w-full">
             <div>
                 <span class="text-[30px] font-samibold">Gurbannazar Ezizow</h1>
             </div>
@@ -37,7 +37,7 @@
         </div>
         <div>
 
-        <div class="text-center pt-6 mb-24">
+        <div class="pt-6 mb-24 text-center">
             <div>
                 <div class="text-[26px] mb-6 font-semibold">
                     <p>{{ $poem['name_'.app()->getLocale()] }}</p>
