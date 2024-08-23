@@ -100,39 +100,49 @@
 
 
 <script>
-    const audioPlayers = [];  // Array to keep track of all audio elements
+    const audioPlayersRunning = [];
+    document.addEventListener("DOMContentLoaded", function() {
+    const audioPlayers = document.querySelectorAll('.audio-player');
 
-    document.querySelectorAll('.audio-player').forEach(player => {
-        const audio = new Audio(player.dataset.audioSrc);
-        audioPlayers.push(audio);  // Add each audio element to the array
+    audioPlayers.forEach(player => {
         const playPauseBtn = player.querySelector('.playPauseBtn');
         const playIcon = player.querySelector('.playIcon');
         const pauseIcon = player.querySelector('.pauseIcon');
         const progressBar = player.querySelector('.progressBar');
-        const currentTimeEl = player.querySelector('.currentTime');
-        const durationEl = player.querySelector('.duration');
+        const currentTimeElement = player.querySelector('.currentTime');
+        const durationElement = player.querySelector('.duration');
+        let audio = null;
 
+        playPauseBtn.addEventListener('click', function() {
+            if (!audio) {
+                // Create a new Audio object and load the source
+                const audioSrc = player.getAttribute('data-audio-src');
+                audio = new Audio(audioSrc);
+                audioPlayersRunning.push(audio);
 
-        audio.addEventListener('loadedmetadata', () => {
-            durationEl.textContent = formatTime(audio.duration);
-            progressBar.max = audio.duration;
-        });
+                // Update the duration when metadata is loaded
+                audio.addEventListener('loadedmetadata', function() {
+                    durationElement.textContent = formatTime(audio.duration);
+                    progressBar.max = Math.floor(audio.duration);
+                });
 
-        audio.addEventListener('timeupdate', () => {
-            const currentTime = audio.currentTime;
-            const progress = (currentTime / audio.duration) * 100;
-            progressBar.value = progress;
-            currentTimeEl.textContent = formatTime(currentTime);
-        });
+                // Update the progress bar and current time while playing
+                audio.addEventListener('timeupdate', function() {
+                    progressBar.value = Math.floor(audio.currentTime);
+                    currentTimeElement.textContent = formatTime(audio.currentTime);
+                });
 
-        progressBar.addEventListener('input', () => {
-            audio.currentTime = progressBar.value;
-        });
+                // Reset icons when the audio ends
+                audio.addEventListener('ended', function() {
+                    playIcon.classList.remove('hidden');
+                    pauseIcon.classList.add('hidden');
+                });
+            }
 
-        playPauseBtn.addEventListener('click', () => {
+            // Toggle play/pause
             if (audio.paused) {
                 // Pause all other audios before playing the new one
-                audioPlayers.forEach(otherAudio => {
+                audioPlayersRunning.forEach(otherAudio => {
                     if (otherAudio !== audio) {
                         otherAudio.pause();
                         // Update the icons for all other players to show the play button
@@ -152,10 +162,14 @@
                 pauseIcon.classList.add('hidden');
             }
         });
-        function formatTime(time) {
-            const minutes = Math.floor(time / 60);
-            const seconds = Math.floor(time % 60);
-            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-        }
+
+        // Helper function to format time in mm:ss
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+        });
     });
+
 </script>

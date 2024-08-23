@@ -1,6 +1,6 @@
 <div class="flex flex-col">
     <div class="flex items-center justify-center w-full mb-3">
-        <p class="uppercase text-[26px]">@lang('nav.poems')</p>
+        <p class="uppercase text-[24px]">@lang('nav.poems')</p>
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-2 md:justify-between">
         @foreach($poems as $poem)

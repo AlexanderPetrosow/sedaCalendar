@@ -1,6 +1,6 @@
 <div id="modal_poem" class="absolute hidden top-0 left-0 flex-col items-center justify-center w-full h-full bg-[#979595c5] text-white">
     <div class="flex items-center justify-center w-full h-full">
-        <div style="scrollbar-width: thin;" class=" w-[750px]  overflow-hidden overflow-y-auto bg-[#859094a2] py-4 relative">
+        <div style="scrollbar-width: thin;" class="flex flex-col items-center w-full h-full  overflow-hidden overflow-y-auto bg-[#859094a2] py-4 relative">
             <div class="absolute top-2 right-2">
                 <i onclick="hideModal()" class='bx bx-x text-[40px] cursor-pointer text-gray-200'></i>
             </div>
@@ -9,7 +9,7 @@
                     @lang('nav.poem_create')
                 </span>
             </div>
-            <form method="POST" action="{{route('poem.store')}}" class="flex flex-col w-full gap-2 px-12 py-2">
+            <form method="POST" action="{{route('poem.store')}}" class="flex flex-col gap-2 px-12 py-2 w-[750px]">
                 @csrf
                 <div class="grid gap-6 md:grid-cols-2">
                     <div>
@@ -19,7 +19,7 @@
                         <input type="text" id="name_ru" name="name_ru" class="block w-full max-w-xs px-3 py-[6px] text-md font-normal shadow-xs text-gray-900 bg-gray-200 border border-solid border-gray-200 rounded-md placeholder-gray-800 focus:outline-none leading-normal" placeholder="Название ру" required />
                     </div>
                 </div>
-                <div class="grid gap-6 md:grid-cols-2">
+                <div class="flex flex-col gap-2">
                     <div>
                         <textarea class="text_tm" id="text_tm" name="text_tm" placeholder="стихотворения тм..."></textarea>
                     </div>

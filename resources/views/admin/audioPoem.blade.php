@@ -17,5 +17,12 @@
         @if(isset($audioPoem->showEdit)) 
             @include('./admin/includeAudioPoem.edit')
         @endif
+        
     @include('./admin/includeAudioPoem.create')
+
+    @if ($errors->any())
+        <script>
+            window.showModal();
+        </script>
+    @endif    
 @endsection

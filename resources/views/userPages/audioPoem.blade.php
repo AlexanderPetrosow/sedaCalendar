@@ -1,17 +1,17 @@
 <div >
     <div class="flex items-center justify-center w-full mb-3">
-        <p class="uppercase text-[26px]">@lang('nav.audio_poems')</p>
+        <p class="uppercase text-[24px]">@lang('nav.audio_poems')</p>
     </div>
     <div class="flex flex-row flex-wrap items-center justify-center gap-2 md:justify-between">
         @foreach($audios as $audio)
-        <div data-audio-src="{{ $audio->getAudio() }}" class="w-full md:w-[49%] p-1 text-white bg-[#c4b5a671] rounded-lg shadow-lg audio-player" >
+        <div data-audio-src="{{ $audio->getAudio() }}" class="w-full md:w-[49%] p-1 text-[18px] text-gray-700 bg-[#c4b5a671] rounded-lg shadow-lg audio-player" >
             <div class="flex flex-row items-center justify-between pl-1">
                     <div style="background-image:url({{asset('images/G_Ezizow3.jpeg')}})" class="flex items-center justify-center p-3 text-gray-800 bg-cover rounded-sm playPauseBtn hover:bg-green-600 focus:outline-none">
                         <i class='playIcon bx bx-play-circle text-[28px] opacity-60'></i>
                         <i class='pauseIcon hidden bx bx-pause text-[28px]'></i>
                     </div>
                 <div class="items-start flex-1 pl-4">
-                    <p class="text-sm text-white">{{ $audio['name_'.app()->getLocale()] }}</p>
+                    <p >{{ $audio['name_'.app()->getLocale()] }}</p>
                     <div class="relative pr-4">
                         <input type="range" min="0" max="100" value="0" class="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer progressBar">
                         <span class="currentTime">00:00</span> / <span class="duration">00:00</span> 
