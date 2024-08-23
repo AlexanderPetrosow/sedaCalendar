@@ -6,7 +6,7 @@
     <div class="bg-gray-100 p-6">
         <div class="flex flex-row flex-wrap justify-center gap-4">
             @foreach($images as $image)
-                <div class="w-[90%] sm:w-[45%] md:w-[48%] lg:w-[30%] aspect-square overflow-hidden bg-gray-50">
+                <div class="w-[90%] sm:w-[45%] md:w-[48%] lg:w-[30%] aspect-square overflow-hidden bg-gray-800 p-1">
                     <img class="bg-cover" src="{{$image->getImage()}}" alt="gallery images">
                 </div>
             @endforeach
